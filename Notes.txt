@@ -1,0 +1,64 @@
+
+See log at bottom for build and burn info
+
+Full details can be found here:
+
+	https://github.com/arendst/Sonoff-MQTT-OTA-Arduino/wiki
+	
+To program hold button while powering up
+
+I've changed the LWT topic and the root topic to the more standard 
+
+	root	devices/<deviceId>
+	LWT		devices/active/<deviceId>
+	
+All other messages are published on
+
+	devices/sonoff/stat|tele/<deviceId>/<topic>
+
+Commands come in on 
+
+	devices/sonoff/cmnd/<deviceId>/<topic>
+	
+Remember to do this before building
+
+	Change the type of device in user_config.h
+
+	WARNING: Change MQTT_MAX_PACKET_SIZE in libraries/PubSubClient.h to at least 300
+	
+Also, don't foget to change the device name under Wifi and MQTT config
+	
+Standard topics
+
+	S20
+		for device id <s20_socket_1>
+
+		devices/active/s20_socket_1 1
+		devices/sonoff/tele/s20_socket_1/INFO Sonoff 8266 Module version 3.2.2, FallbackTopic DVES_0718AB, GroupTopic sonoffpows
+		devices/sonoff/tele/s20_socket_1/INFO Webserver active for Admin on s20_socket_1-6315 with IP address 192.168.0.121
+		devices/sonoff/stat/s20_socket_1/POWER ON
+		devices/sonoff/tele/s20_socket_1/POWER ON
+		devices/sonoff/tele/s20_socket_1/UPTIME 0
+		devices/sonoff/tele/s20_socket_1/AP 1
+		devices/sonoff/tele/s20_socket_1/SSID GIBBONS
+		devices/sonoff/tele/s20_socket_1/RSSI 74
+		devices/sonoff/tele/s20_socket_1/TIME 2017-02-04T10:49:13
+
+
+======================================================================================================
+Log
+======================================================================================================
+
+4/2/2017
+	Change firmware to 
+		use standard LWT topic
+		use devices topic as root
+	Burned new firmware to two S20 sockets
+		device ids are	
+			s20_socket_1
+			s20_socket_2
+			
+
+
+		
+		

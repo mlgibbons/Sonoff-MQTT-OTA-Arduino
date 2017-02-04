@@ -24,10 +24,10 @@
 #define SAVE_STATE             1            // [SaveState] Save changed power state to Flash (0 = disable, 1 = enable)
 
 // -- Wifi -----------------------------------
-#define STA_SSID1              "indebuurt1"      // [Ssid1] Wifi SSID
-#define STA_PASS1              "VnsqrtnrsddbrN"  // [Password1] Wifi password
-#define STA_SSID2              "indebuurt2"      // [Ssid2] Optional alternate AP Wifi SSID
-#define STA_PASS2              "VnsqrtnrsddbrN"  // [Password2] Optional alternate AP Wifi password
+#define STA_SSID1              "GIBBONS"         // [Ssid1] Wifi SSID
+#define STA_PASS1              "ilovezelda"      // [Password1] Wifi password
+#define STA_SSID2              "sonoff"          // [Ssid2] Optional alternate AP Wifi SSID
+#define STA_PASS2              "charlie"         // [Password2] Optional alternate AP Wifi password
 #define WIFI_HOSTNAME          "%s-%04d"         // [Hostname] Expands to <MQTT_TOPIC>-<last 4 decimal chars of MAC address>
 #define WIFI_CONFIG_TOOL       WIFI_WPSCONFIG    // [WifiConfig] Default tool if wifi fails to connect
                                                  //   (WIFI_RESTART, WIFI_SMARTCONFIG, WIFI_MANAGER, WIFI_WPSCONFIG, WIFI_RETRY)
@@ -58,7 +58,7 @@
   #define MQTT_USER            "cloudmqttuser"      // [MqttUser] Mandatory user
   #define MQTT_PASS            "cloudmqttpassword"  // [MqttPassword] Mandatory password
 #else
-  #define MQTT_HOST            "domus1"     // [MqttHost]
+  #define MQTT_HOST            "192.168.0.57"     // [MqttHost]
   #define MQTT_PORT            1883         // [MqttPort] MQTT port (10123 on CloudMQTT)
   #define MQTT_USER            "DVES_USER"  // [MqttUser] Optional user
   #define MQTT_PASS            "DVES_PASS"  // [MqttPassword] Optional password
@@ -66,11 +66,14 @@
 
 #define MQTT_CLIENT_ID         "DVES_%06X"  // [MqttClient] Also fall back topic using Chip Id = last 6 characters of MAC address
 
-#define SUB_PREFIX             "cmnd"       // Sonoff devices subscribe to:- SUB_PREFIX/MQTT_TOPIC and SUB_PREFIX/MQTT_GRPTOPIC
-#define PUB_PREFIX             "stat"       // Sonoff devices publish to:- PUB_PREFIX/MQTT_TOPIC
-#define PUB_PREFIX2            "tele"       // Sonoff devices publish telemetry data to:- PUB_PREFIX2/MQTT_TOPIC/UPTIME, POWER/LIGHT and TIME
+#define SUB_PREFIX             "devices/sonoff/cmnd"       // Sonoff devices subscribe to:- SUB_PREFIX/MQTT_TOPIC and SUB_PREFIX/MQTT_GRPTOPIC
+#define PUB_PREFIX             "devices/sonoff/stat"       // Sonoff devices publish to:- PUB_PREFIX/MQTT_TOPIC
+#define PUB_PREFIX2            "devices/sonoff/tele"       // Sonoff devices publish telemetry data to:- PUB_PREFIX2/MQTT_TOPIC/UPTIME, POWER/LIGHT and TIME
+#define LWT_PREFIX             "devices/active"            // LWT is published to LWT_PREFIX/MQTT_TOPIC with a value of 0 or 1
+
                                             //   May be named the same as PUB_PREFIX
 #define MQTT_TOPIC             PROJECT      // [Topic] (unique) MQTT device topic
+
 #define MQTT_BUTTON_RETAIN     0            // [ButtonRetain] Button may send retain flag (0 = off, 1 = on)
 #define MQTT_POWER_RETAIN      0            // [PowerRetain] Power status message may send retain flag (0 = off, 1 = on)
 
@@ -240,7 +243,7 @@
 
 #elif MODULE == SONOFF_POW                  // programming header 1:3.3V 2:rx 3:tx 4:gnd
   #define APP_NAME             "Sonoff Pow Module"
-  #define MQTT_GRPTOPIC        "pows"       // [GroupTopic] MQTT Group topic
+  #define MQTT_GRPTOPIC        "sonoffpows"       // [GroupTopic] MQTT Group topic
   #define USE_POWERMONITOR                  // Enable Power Monitoring
 //  #define USE_POWERCALIBRATION              // Enable setting Calibration parameters by user commands
 /*-------------------------------------------------------------------------------------------*/

@@ -965,12 +965,12 @@ void mqtt_reconnect()
 #endif  // USE_DISCOVERY
 #endif  // USE_MQTT_TLS
   mqttClient.setServer(sysCfg.mqtt_host, sysCfg.mqtt_port);
-  snprintf_P(stopic, sizeof(stopic), PSTR("%s/%s/LWT"), PUB_PREFIX2, sysCfg.mqtt_topic);
-  snprintf_P(svalue, sizeof(svalue), PSTR("Offline"));
+  snprintf_P(stopic, sizeof(stopic), PSTR("%s/%s"), LWT_PREFIX, sysCfg.mqtt_topic);
+  snprintf_P(svalue, sizeof(svalue), PSTR("0"));
   if (mqttClient.connect(MQTTClient, sysCfg.mqtt_user, sysCfg.mqtt_pwd, stopic, 1, true, svalue)) {
     addLog_P(LOG_LEVEL_INFO, PSTR("MQTT: Connected"));
     mqttcounter = 0;
-    snprintf_P(svalue, sizeof(svalue), PSTR("Online"));
+    snprintf_P(svalue, sizeof(svalue), PSTR("1"));
     mqtt_publish(stopic, svalue, true);
     udpConnected = false;
     mqtt_connected();
